@@ -1,0 +1,61 @@
+﻿    <div class="titulo" style="text-align:center; font-display:" >
+        <h1>Cadastro de Professores</h1>
+        <br/>
+    </div>    
+    
+    <div class="alert alert-primary" role="alert" style=" height: 45px; text-align:center">
+        @ViewBag.Mensagem
+    </div>
+
+    <form action="AdicionarOuSalvar" method="post">
+        @Html.AntiForgeryToken()
+        <div class="row" style="display:none">
+            <div class="col">
+                <div id="displayId">
+                    <label for="professor">Id</label>
+                    <input name="Id" id="Id" class="form-control" value="@ViewBag.Professor.Id" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="Professor">Nome:</label>
+                <input name="Nome" id="Nome" value="@ViewBag.Professor.Nome" class="form-control" maxlength="30" required />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col">
+                <input type="submit" class="btn btn-success" value="Adicionar/Salvar" />
+            </div>
+        </div>
+        <br />
+        <div>
+            <div class="aling-itens:center">
+                <table class="table table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nome</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var professor in ViewBag.Professores)
+                        {
+                        <tr id="ProfessorId_@professor.Id">
+                            <td>@professor.Id</td>
+                            <td><a data-test="@professor.Id" href="../Aluno/Form?professorId=@professor.Id" type="text/html">@professor.Nome</a></td>
+                            <td>
+                                <a data-test="@professor.Id" href="Excluir?professorId=@professor.Id" type="button" class="btn btn-danger botaoExcluirProfessor">Excluir </a>
+                                <a data-test="@professor.Id" href="Alterar?professorId=@professor.Id" type="button" class="btn btn-primary botaoAlterarProfessor">Alterar </a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </form>
+

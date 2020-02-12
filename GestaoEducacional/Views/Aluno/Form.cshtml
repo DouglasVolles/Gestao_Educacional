@@ -1,0 +1,82 @@
+﻿<div class="titulo" style="text-align:center">
+    <h1>Cadastro dos alunos do professor @ViewBag.Professor.Nome</h1>
+    <br />
+</div>
+
+<div class="alert alert-primary" role="alert" style="height:45px; text-align:center">
+    @ViewBag.Mensagem
+</div>
+
+<form action="AdicionarOuSalvar" method="post">
+    @Html.AntiForgeryToken()
+    <div class="row" style="display:none">
+        <div class="col">
+            <div id="displayId">
+                <label for="Id">Id</label>
+                <input name="Id" id="Id" class="form-control" value="@ViewBag.Aluno.Id" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="display:none">
+        <div class="col">
+            <div id="displayId">
+                <label for="ProfessorId">ProfessorId</label>
+                <input name="ProfessorId" id="ProfessorId" class="form-control" value="@ViewBag.Aluno.ProfessorId" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label for="Nome">Nome:</label>
+            <input name="Nome" id="Nome" value="@ViewBag.Aluno.Nome" class="form-control" maxlength="30" required />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="DataNascimento" class="col-2 col-form-label">Data Nascimento</label>
+        <div class="col">
+            <input class="form-control" type="date" data-date-format="dd/mm/yyyy" value="@Convert.ToDateTime(ViewBag.aluno.DataNascimento, System.Globalization.CultureInfo.InvariantCulture).ToString("dd/mm/yyyy")" id="DataNascimento" name="DataNascimento">
+        </div>
+    </div>
+
+ 
+    <br />
+    <div class="row">
+        <div class="col">
+            <input type="submit" class="btn btn-success" value="Adicionar/Salvar" />
+        </div>
+    </div>
+    <br />
+    <div>
+        <div class="aling-itens:center">
+            <table class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Data Nascimento</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var aluno in ViewBag.Alunos)
+                    {
+                        <tr id="AlunoId_@aluno.Id">
+                            <td>@aluno.Id</td>
+                            <td>@aluno.Nome</td>
+                            <td>@Convert.ToDateTime(aluno.DataNascimento, System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <a data-test="@aluno.Id" href="Excluir?alunoId=@aluno.Id" type="button" class="btn btn-danger botaoExcluirAluno">Excluir </a>
+                                <a data-test="@aluno.Id" href="Alterar?alunoId=@aluno.Id" type="button" class="btn btn-primary botaoAlterarAluno">Alterar </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</form>
+
+

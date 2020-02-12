@@ -1,0 +1,51 @@
+﻿<div class="titulo" style="text-align:center;">
+    <h1>Alunos maiores de 16 anos</h1>
+    <br />
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Aluno</th>
+                <th scope="col">Professor</th>
+                <th scope="col">Data Nascimento</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var aluno in ViewBag.Alunos)
+            {
+                <tr>
+                    <td>@aluno.Nome</td>
+                    <td>@aluno.Professor.Nome</td>
+                    <td>@Convert.ToDateTime(aluno.DataNascimento, System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />
+<div class="titulo" style="text-align:center;">
+    <h1>Professores cuja média de idade de seus alunos é de 15 a 17 anos</h1>
+    <br />
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Professor</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var professor in ViewBag.Professores)
+            {
+                <tr>
+                    <td>@professor.Nome</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />
+
